@@ -1,0 +1,22 @@
+{
+  "agents": [
+    {
+      "id": "ag_default",
+      "name": "Default Assistant",
+      "description": "Chat + agent helper.",
+      "systemPrompt": "You are a helpful assistant. Use markdown. Answer in the user's language. Use tools when useful.",
+      "model": "smart",
+      "mode": "agent",
+      "temperature": 0.7,
+      "tools": [
+        "builtin_web_search",
+        "builtin_fetch_url",
+        "builtin_current_time",
+        "builtin_calculator"
+      ],
+      "skills": [],
+      "enabled": true
+    }
+  ],
+  "skills": []
+}

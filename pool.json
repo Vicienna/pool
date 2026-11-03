@@ -1,0 +1,329 @@
+{
+  "version": 1,
+  "settings": {
+    "adminToken": null,
+    "defaultAlias": "smart",
+    "upstreamTimeoutMs": 120000,
+    "paidFallback": true,
+    "accent": "mint",
+    "logLevel": "info",
+    "probeConcurrency": 5,
+    "logBufferSize": 500,
+    "sseHeartbeatMs": 25000,
+    "maxBodyBytes": 33554432,
+    "enableShellTool": false,
+    "fallbackMode": "priority",
+    "maxToolIterations": 8,
+    "maxContextChars": 2000000,
+    "searxngUrl": "",
+    "searchEngine": "auto",
+    "searchPriority": "bing,4get-ddg,yahoo,ecosia,yep,mojeek,librey,brave,marginalia,mwmbl,stract,searxng",
+    "searxngCustomUrls": [],
+    "forceThinkPrompt": false
+  },
+  "providers": {
+    "groq": {
+      "base": "https://api.groq.com/openai/v1",
+      "tz": "UTC",
+      "paid": false,
+      "needsAccountId": false,
+      "enabled": true,
+      "priority": 100,
+      "models": {
+        "smart": "openai/gpt-oss-120b",
+        "fast": "llama-3.1-8b-instant"
+      }
+    },
+    "cloudflare": {
+      "base": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1",
+      "tz": "UTC",
+      "paid": false,
+      "needsAccountId": true,
+      "enabled": true,
+      "priority": 80,
+      "models": {
+        "smart": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "fast": "@cf/meta/llama-3.1-8b-instruct"
+      }
+    },
+    "zai": {
+      "base": "https://api.z.ai/api/paas/v4",
+      "tz": "UTC",
+      "paid": false,
+      "needsAccountId": false,
+      "enabled": true,
+      "priority": 70,
+      "models": {
+        "smart": "glm-4.7-flash",
+        "fast": "glm-4.5-flash"
+      }
+    },
+    "openrouter": {
+      "base": "https://openrouter.ai/api/v1",
+      "tz": "UTC",
+      "paid": false,
+      "needsAccountId": false,
+      "enabled": true,
+      "priority": 50,
+      "models": {
+        "smart": "deepseek/deepseek-r1:free",
+        "fast": "qwen/qwen3-8b:free"
+      }
+    },
+    "mistral": {
+      "base": "https://api.mistral.ai/v1",
+      "tz": "UTC",
+      "paid": false,
+      "needsAccountId": false,
+      "enabled": true,
+      "priority": 60,
+      "models": {
+        "smart": "mistral-large-latest",
+        "fast": "mistral-small-latest"
+      }
+    },
+    "deepseek": {
+      "base": "https://api.deepseek.com/v1",
+      "tz": "UTC",
+      "paid": true,
+      "needsAccountId": false,
+      "enabled": true,
+      "priority": 10,
+      "models": {
+        "smart": "deepseek-reasoner",
+        "fast": "deepseek-chat"
+      }
+    }
+  },
+  "accounts": [],
+  "models": [
+    {
+      "id": "mdl_b1968d1c",
+      "provider": "groq",
+      "modelId": "openai/gpt-oss-120b",
+      "label": "smart",
+      "labels": [
+        "smart"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 100,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_bd5b5e12",
+      "provider": "groq",
+      "modelId": "llama-3.1-8b-instant",
+      "label": "fast",
+      "labels": [
+        "fast"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 80,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_8c2fb611",
+      "provider": "cloudflare",
+      "modelId": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "label": "smart",
+      "labels": [
+        "smart"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 100,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_6ec1ff79",
+      "provider": "cloudflare",
+      "modelId": "@cf/meta/llama-3.1-8b-instruct",
+      "label": "fast",
+      "labels": [
+        "fast"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 80,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_f447c3ee",
+      "provider": "zai",
+      "modelId": "glm-4.7-flash",
+      "label": "smart",
+      "labels": [
+        "smart"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 100,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_d9cab8ca",
+      "provider": "zai",
+      "modelId": "glm-4.5-flash",
+      "label": "fast",
+      "labels": [
+        "fast"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 80,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_733a69af",
+      "provider": "openrouter",
+      "modelId": "deepseek/deepseek-r1:free",
+      "label": "smart",
+      "labels": [
+        "smart"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 100,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_41c9e861",
+      "provider": "openrouter",
+      "modelId": "qwen/qwen3-8b:free",
+      "label": "fast",
+      "labels": [
+        "fast"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 80,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_97b371d9",
+      "provider": "mistral",
+      "modelId": "mistral-large-latest",
+      "label": "smart",
+      "labels": [
+        "smart"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 100,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_1b726068",
+      "provider": "mistral",
+      "modelId": "mistral-small-latest",
+      "label": "fast",
+      "labels": [
+        "fast"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 80,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_a91e8ba7",
+      "provider": "deepseek",
+      "modelId": "deepseek-reasoner",
+      "label": "smart",
+      "labels": [
+        "smart"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 100,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    },
+    {
+      "id": "mdl_8578b6f0",
+      "provider": "deepseek",
+      "modelId": "deepseek-chat",
+      "label": "fast",
+      "labels": [
+        "fast"
+      ],
+      "input": [
+        "text"
+      ],
+      "output": [
+        "text"
+      ],
+      "priority": 80,
+      "enabled": true,
+      "contextLength": null,
+      "note": "auto-seeded"
+    }
+  ]
+}

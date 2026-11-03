@@ -2259,7 +2259,7 @@ function renderProviders() {
     h += '<td><select data-toggle="enabled" data-prov="' + esc(name) + '" style="background:transparent;border:none;font-size:10px"><option value="true"' + (p.enabled ? ' selected' : '') + '>ON</option><option value="false"' + (!p.enabled ? ' selected' : '') + '>OFF</option></select></td>';
     h += '<td class="num">' + cnt + '</td>';
     h += '<td style="font-size:9px;color:var(--fg-3)">' + esc((p.models && p.models.smart) || '—') + '</td>';
-    h += '<td><button class="btn small ghost" data-edit-prov="' + esc(name) + '">Edit</button> <button class="btn small ghost danger" data-del="' + esc(name) + '"' + (cnt > 0 ? ' disabled title="hapus akun dulu"' : '') + '>" + '' + ic('x') + '' + "</button></td>';
+    h += '<td><button class="btn small ghost" data-edit-prov="' + esc(name) + '">Edit</button> <button class="btn small ghost danger" data-del="' + esc(name) + '"' + (cnt > 0 ? ' disabled title="hapus akun dulu"' : '') + '>' + ic('x') + '</button></td>';
     h += '</tr>';
   });
   h += '</tbody></table>';
@@ -2586,7 +2586,7 @@ function renderMsg(m, idx) {
       hu += '<div class="msg-attachments">';
       m.attachments.forEach(function(a) {
         if (a.type === 'image' && a.dataUrl) hu += '<img class="msg-attach-img" src="' + a.dataUrl + '" alt="' + esc(a.name) + '">';
-        else hu += '<div class="msg-attach-file">▤ ' + esc(a.name) + ' (' + fmtSize(a.size) + ')' + (a.truncated ? ' · preview only' : '') + '</div>';
+        else hu += '<div class="msg-attach-file">' + ic('file') + ' ' + esc(a.name) + ' (' + fmtSize(a.size) + ')' + (a.truncated ? ' · preview only' : '') + '</div>';
       });
       hu += '</div>';
     }
@@ -2596,17 +2596,17 @@ function renderMsg(m, idx) {
   if (m.role === 'assistant') {
     var isLast = currentConv && idx === currentConv.messages.length - 1;
     var h = '<div class="msg msg-assistant">';
-    h += '<div class="msg-actions">' + (m.content ? '<button class="msg-action-btn" data-mact="copy" data-idx="' + idx + '" title="copy">copy</button>' : '') + '<button class="msg-action-btn danger" data-mact="truncate" data-idx="' + idx + '" title="hapus dari sini">del</button>' + (isLast ? '<button class="msg-action-btn" data-mact="regen" data-idx="' + idx + '" title="regenerate">↻</button>' : '') + '</div>';
+    h += '<div class="msg-actions">' + (m.content ? '<button class="msg-action-btn" data-mact="copy" data-idx="' + idx + '" title="copy">copy</button>' : '') + '<button class="msg-action-btn danger" data-mact="truncate" data-idx="' + idx + '" title="hapus dari sini">del</button>' + (isLast ? '<button class="msg-action-btn" data-mact="regen" data-idx="' + idx + '" title="regenerate">' + ic('regen') + '</button>' : '') + '</div>';
     h += '<div class="msg-role">ASSISTANT' + (m.mode ? ' · ' + m.mode.toUpperCase() : '') + '</div>';
     if (m.reasoning) {
       h += '<details class="msg-reasoning"><summary>Thinking (' + m.reasoning.length + ' chars)</summary><div class="reasoning-content">' + escHtml(m.reasoning) + '</div></details>';
     }
     if (m.content) h += '<div class="msg-content md-content">' + mdRender(m.content) + '</div>';
-    if (m.tool_calls) { m.tool_calls.forEach(function(tc) { h += '<div class="msg-tool-block"><div><span class="tc-name">▸ ' + esc(tc.function.name) + '</span></div><div class="tc-args">' + esc(tc.function.arguments || '') + '</div></div>'; }); }
+    if (m.tool_calls) { m.tool_calls.forEach(function(tc) { h += '<div class="msg-tool-block"><div><span class="tc-name">' + ic('chevD') + ' ' + esc(tc.function.name) + '</span></div><div class="tc-args">' + esc(tc.function.arguments || '') + '</div></div>'; }); }
     h += '</div>';
     return h;
   }
-  if (m.role === 'tool') return '<div class="msg msg-tool-block"><div class="tc-result" style="margin-top:0">← ' + esc(m.content || '').slice(0, 500) + '</div></div>';
+  if (m.role === 'tool') return '<div class="msg msg-tool-block"><div class="tc-result" style="margin-top:0">' + ic('arrowBack') + ' ' + esc(m.content || '').slice(0, 500) + '</div></div>';
   return '';
 }
 function appendStreamingMsg() { var box = el('#chat-thread'); var div = document.createElement('div'); div.className = 'msg msg-assistant'; div.innerHTML = '<div class="msg-role">ASSISTANT</div><div class="msg-content streaming"></div>'; box.appendChild(div); box.scrollTop = box.scrollHeight; return div.querySelector('.msg-content'); }
@@ -2694,7 +2694,7 @@ function updateChatInfo(info) {
     bar.innerHTML = '<span class="ci-item ci-active">\u25cf STREAMING</span>' + (info.served ? '<span class="ci-item"><b style="color:var(--accent)">' + esc(info.served.provider) + '</b> / ' + esc(info.served.account) + (info.served.model ? ' · ' + esc(info.served.model) : '') + '</span>' : '<span class="ci-item ci-dim">routing...</span>') + (info.mode ? '<span class="ci-item ci-dim">· ' + info.mode.toUpperCase() + ' mode</span>' : '');
     return;
   }
-  if (info.status === 'error') { bar.innerHTML = '<span class="ci-item ci-err">\u2715 error</span>'; return; }
+  if (info.status === 'error') { bar.innerHTML = '<span class="ci-item ci-err">' + ic('warn') + ' error</span>'; return; }
   if (info.served) {
     var bits = ['<span class="ci-item"><b style="color:var(--accent)">' + esc(info.served.provider) + '</b> / ' + esc(info.served.account) + (info.served.model ? ' · ' + esc(info.served.model) : '') + '</span>'];
     if (info.inputTokens) bits.push('<span class="ci-item">in: ' + info.inputTokens + '</span>');
@@ -3068,7 +3068,7 @@ function renderAttachments() {
   var box = el('#chat-attachments'); if (!box) return;
   if (!pendingAttachments.length) { box.innerHTML = ''; box.style.display = 'none'; return; }
   box.style.display = 'flex';
-  box.innerHTML = pendingAttachments.map(function(a, i) { var thumb = (a.type === 'image' && a.dataUrl) ? '<img src="' + a.dataUrl + '" style="width:24px;height:24px;object-fit:cover;border:1px solid var(--line)">' : '▤'; return '<div class="attachment-chip">' + thumb + ' <span>' + esc(a.name) + ' (' + fmtSize(a.size) + ')</span><button class="attach-remove" data-i="' + i + '">✕</button></div>'; }).join('');
+  box.innerHTML = pendingAttachments.map(function(a, i) { var thumb = (a.type === 'image' && a.dataUrl) ? '<img src="' + a.dataUrl + '" style="width:24px;height:24px;object-fit:cover;border:1px solid var(--line)">' : ic('file'); return '<div class="attachment-chip">' + thumb + ' <span>' + esc(a.name) + ' (' + fmtSize(a.size) + ')</span><button class="attach-remove" data-i="' + i + '" title="remove">' + ic('x') + '</button></div>'; }).join('');
   box.querySelectorAll('.attach-remove').forEach(function(b) { b.addEventListener('click', function() { pendingAttachments.splice(parseInt(b.dataset.i, 10), 1); renderAttachments(); }); });
 }
 el('#chat-attach-btn').addEventListener('click', function() { el('#chat-attach-input').click(); });
@@ -3166,9 +3166,9 @@ function renderPriorityRows() {
     return '<div data-pri-name="' + esc(eng) + '" style="display:flex;gap:6px;align-items:center;padding:5px 8px;border:2px solid var(--line);background:var(--bg-2)">' +
       '<span style="font-family:Silkscreen,monospace;font-size:11px;min-width:22px;color:var(--accent)">' + (idx+1) + '.</span>' +
       '<span style="flex:1;font-size:11px">' + esc(m.name) + ' <span style="color:var(--fg-3);font-size:9px">\u00b7 ' + esc(m.desc) + '</span></span>' +
-      '<button class="btn ghost small" data-pri-up="' + esc(eng) + '"' + (idx === 0 ? ' disabled' : '') + ' title="up">\u25b2</button>' +
-      '<button class="btn ghost small" data-pri-down="' + esc(eng) + '"' + (idx === _priorityCache.length-1 ? ' disabled' : '') + ' title="down">\u25bc</button>' +
-      '<button class="btn ghost small danger" data-pri-del="' + esc(eng) + '" title="remove">\u2715</button>' +
+      '<button class="btn ghost small" data-pri-up="' + esc(eng) + '"' + (idx === 0 ? ' disabled' : '') + ' title="up">' + ic('chevU') + '</button>' +
+      '<button class="btn ghost small" data-pri-down="' + esc(eng) + '"' + (idx === _priorityCache.length-1 ? ' disabled' : '') + ' title="down">' + ic('chevD') + '</button>' +
+      '<button class="btn ghost small danger" data-pri-del="' + esc(eng) + '" title="remove">' + ic('x') + '</button>' +
       '</div>';
   }).join('');
   var missing = Object.keys(SEARCH_ENGINE_META).filter(function(k){ return _priorityCache.indexOf(k) === -1; });
@@ -3325,7 +3325,7 @@ el('#s-reset-all').addEventListener('click', async function() { if (!(await conf
 function openModal(title, body, opts) {
   opts = opts || {};
   var ov = document.createElement('div'); ov.className = 'overlay';
-  ov.innerHTML = '<div class="modal' + (opts.wide ? ' wide' : '') + '"><div class="modal-head"><div class="sec-title" style="border:none;font-size:12px">' + esc(title) + '</div><button class="btn ghost small" data-act="close">✕</button></div><div class="modal-body">' + body + '</div><div class="modal-foot"><button class="btn ghost" data-act="cancel">Cancel</button>' + (opts.onConfirm ? '<button class="btn primary" data-act="confirm">' + esc(opts.confirmLabel || 'Save') + '</button>' : '') + '</div></div>';
+  ov.innerHTML = '<div class="modal' + (opts.wide ? ' wide' : '') + '"><div class="modal-head"><div class="sec-title" style="border:none;font-size:12px">' + esc(title) + '</div><button class="btn ghost small" data-act="close" title="close">' + ic('x') + '</button></div><div class="modal-body">' + body + '</div><div class="modal-foot"><button class="btn ghost" data-act="cancel">Cancel</button>' + (opts.onConfirm ? '<button class="btn primary" data-act="confirm">' + esc(opts.confirmLabel || 'Save') + '</button>' : '') + '</div></div>';
   document.body.appendChild(ov);
   var escHandler = function(e) { if (e.key === 'Escape' && document.body.contains(ov)) { try { if (opts.onCancel) opts.onCancel(); } catch(er) {} close(); } };
   document.addEventListener('keydown', escHandler);
