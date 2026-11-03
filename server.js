@@ -1479,7 +1479,6 @@ table tr:hover td { border-left-color: var(--accent); }
 .msg-reasoning .reasoning-content { font-size: 11px; color: var(--fg-2); white-space: pre-wrap; word-wrap: break-word; padding: 4px 0 6px; max-height: 320px; overflow-y: auto; line-height: 1.5; border-top: 1px dashed var(--line); margin-top: 2px; }
 body.hide-reasoning .msg-reasoning { display: none; }
 .moon-thinking { display: flex; align-items: center; gap: 10px; padding: 8px 12px; margin: 8px 0; background: var(--bg-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--fg-2); }
-.moon-icon { font-size: 16px; display: inline-block; animation: moon-pulse 2s steps(2, start) infinite; }
 @keyframes moon-pulse { 50% { opacity: 0.5; } }
 .moon-text { color: var(--fg-3); font-style: italic; }
 .msg-stream-group { display: block; }
@@ -1571,6 +1570,16 @@ body.hide-reasoning .msg-reasoning { display: none; }
 .mode-toggle button { background: transparent; border: none; padding: 4px 10px; font-family: "Silkscreen", monospace; font-size: 10px; letter-spacing: .06em; color: var(--fg-3); cursor: pointer; text-transform: uppercase; }
 .mode-toggle button.active.chat { background: var(--info); color: var(--bg); }
 .mode-toggle button.active.agent { background: var(--accent); color: var(--bg); }
+.ic { width: 1em; height: 1em; display: inline-block; vertical-align: -0.14em; flex-shrink: 0; }
+.rail nav button .ic { font-size: 13px; margin-right: 7px; vertical-align: -2px; }
+.btn .ic { font-size: 12px; }
+.conv-action .ic, .msg-action-btn .ic { font-size: 11px; vertical-align: -1px; }
+.attach-remove .ic { font-size: 11px; vertical-align: -1px; }
+@keyframes ic-spin { to { transform: rotate(360deg); } }
+.ic.spin { animation: ic-spin 1s steps(8) infinite; transform-origin: center; }
+.ic-moon { width: 18px; height: 18px; }
+.moon-core { transition: none; }
+@keyframes moon-pulse { 50% { opacity: 0.5; } }
 @media (max-width: 900px) {
   .app { grid-template-columns: 1fr; }
   .rail { flex-direction: row; overflow-x: auto; padding: 0; }
@@ -1590,18 +1599,18 @@ body.hide-reasoning .msg-reasoning { display: none; }
 <div class="app">
   <aside class="rail">
     <div class="brand">POOL<span>▮</span></div>
-    <nav>
-      <button data-tab="chat" class="active">▮ Chat</button>
-      <button data-tab="agents">▪ Agents</button>
-      <button data-tab="tools">▪ Tools</button>
-      <button data-tab="playground">▪ Playground</button>
-      <button data-tab="mcp">▪ MCP</button>
-      <button data-tab="overview">▪ Overview</button>
-      <button data-tab="accounts">▪ Accounts</button>
-      <button data-tab="providers">▪ Providers</button>
-      <button data-tab="models">▪ Models</button>
-      <button data-tab="logs">▪ Logs</button>
-      <button data-tab="settings">▪ Settings</button>
+    <nav id="rail-nav">
+      <button data-tab="chat" class="active"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M2 2h12v9H8l-4 3v-3H2z"/></svg>Chat</button>
+      <button data-tab="agents"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="4" y="4" width="8" height="7"/><path d="M8 1.5V4M5.5 7h.5M10 7h.5M6 13.5h4"/></svg>Agents</button>
+      <button data-tab="tools"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M9.8 2.6a3 3 0 0 0-3.8 3.8L2 10.4 3.6 12l4-4a3 3 0 0 0 3.8-3.8L9.7 5.9l-.8-.8z"/></svg>Tools</button>
+      <button data-tab="playground"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M6 2v4.3L2.9 12A1.6 1.6 0 0 0 4.3 14.5h7.4A1.6 1.6 0 0 0 13.1 12L10 6.3V2M4.5 2h7M4.8 9.5h6.4"/></svg>Playground</button>
+      <button data-tab="mcp"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M8 1.5v4M8 10.5v4M1.5 8h4M10.5 8h4"/><rect x="6" y="6" width="4" height="4"/></svg>MCP</button>
+      <button data-tab="overview"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="5" height="5"/></svg>Overview</button>
+      <button data-tab="accounts"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><circle cx="8" cy="5" r="2.5"/><path d="M3 14c0-3 2.2-4.5 5-4.5S13 11 13 14"/></svg>Accounts</button>
+      <button data-tab="providers"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><ellipse cx="8" cy="3.5" rx="5.5" ry="2"/><path d="M2.5 3.5v9a5.5 2 0 0 0 11 0v-9M2.5 8a5.5 2 0 0 0 11 0"/></svg>Providers</button>
+      <button data-tab="models"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M8 1.5l6 3.2-6 3.2-6-3.2zM2 8.5L8 11.7l6-3.2M2 11.5L8 14.7l6-3.2"/></svg>Models</button>
+      <button data-tab="logs"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M2 4h8M2 8h12M2 12h6"/></svg>Logs</button>
+      <button data-tab="settings"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.5v2.3M8 12.2v2.3M1.5 8h2.3M12.2 8h2.3M3.4 3.4l1.6 1.6M11 11l1.6 1.6M12.6 3.4L11 5M5 11l-1.6 1.6"/></svg>Settings</button>
     </nav>
     <div class="foot">
       <button id="theme-toggle" class="btn ghost small" style="width:100%;margin-bottom:6px;justify-content:center">Light Mode</button>
@@ -1618,8 +1627,8 @@ body.hide-reasoning .msg-reasoning { display: none; }
           </div>
           <div class="chat-conv-list" id="conv-list"></div>
           <div class="conv-sidebar-foot">
-            <button class="btn ghost small" id="conv-export" title="Export all conversations">↓ Export</button>
-            <button class="btn ghost small" id="conv-import" title="Import conversations">↑ Import</button>
+            <button class="btn ghost small" id="conv-export" title="Export all conversations"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M2.5 13.5h11"/></svg>Export</button>
+            <button class="btn ghost small" id="conv-import" title="Import conversations"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M8 10V2M4.5 5.5L8 2l3.5 3.5M2.5 13.5h11"/></svg>Import</button>
             <button class="btn ghost small danger" id="conv-delete-all" title="Delete all">Clear</button>
           </div>
         </aside>
@@ -1642,10 +1651,10 @@ body.hide-reasoning .msg-reasoning { display: none; }
           <div class="chat-thread" id="chat-thread"></div>
           <div id="chat-attachments" class="chat-attachments"></div>
           <div class="chat-input-row">
-            <button class="btn ghost small" id="chat-attach-btn" title="Attach file (max 8MB)">▤</button>
+            <button class="btn ghost small" id="chat-attach-btn" title="Attach file (max 8MB)"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M13 7.5L8 12.5a3.2 3.2 0 0 1-4.5-4.5l6-6a2.2 2.2 0 0 1 3.1 3.1l-6 6a1.2 1.2 0 0 1-1.7-1.7l5.3-5.3"/></svg></button>
             <input type="file" id="chat-attach-input" multiple accept="image/*,.txt,.md,.json,.js,.py,.html,.css,.xml,.yaml,.yml,.csv,.log,.sh,.ts,.tsx,.jsx,.sql,.rs,.go,.java,.c,.cpp,.h,.rb,.php,.toml,.ini,.conf,.env" style="display:none">
             <textarea id="chat-input" placeholder="Type a message... (Enter to send, Shift+Enter for newline)"></textarea>
-            <button class="btn primary" id="chat-send">Kirim →</button>
+            <button class="btn primary" id="chat-send">Kirim<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
             <button class="btn ghost" id="chat-stop" style="display:none">Stop</button>
           </div>
         </div>
@@ -1678,7 +1687,7 @@ body.hide-reasoning .msg-reasoning { display: none; }
       </div>
       <div class="sec">
         <div class="sec-head"><div class="sec-title">Plugins</div><button class="btn primary small" id="btn-add-plugin">+ New Plugin</button></div>
-        <div style="color:var(--warn);font-size:10px;margin-bottom:8px">⚠ Plugin source JS dieksekusi saat load. Hanya isi plugin yang kamu percaya.</div>
+        <div style="color:var(--warn);font-size:10px;margin-bottom:8px">' + ic('warn') + ' Plugin source JS dieksekusi saat load. Hanya isi plugin yang kamu percaya.</div>
         <div id="plugins-table"></div>
       </div>
     </section>
@@ -1691,9 +1700,9 @@ body.hide-reasoning .msg-reasoning { display: none; }
       </div>
       <div class="field"><label>Message</label><textarea id="pg-input" rows="4" placeholder="Ask something..."></textarea></div>
       <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
-        <button class="btn primary" id="pg-send">Kirim →</button>
+        <button class="btn primary" id="pg-send">Kirim<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
         <button class="btn ghost" id="pg-clear">Clear</button>
-        <button class="btn ghost" id="pg-preview">&gt; Test Fallback Order</button>
+        <button class="btn ghost" id="pg-preview"><svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 2.5L11 8l-8 5.5z"/></svg>Test Fallback Order</button>
       </div>
       <div class="pg-out" id="pg-out"></div>
       <div class="pg-meta" id="pg-meta"></div>
@@ -1877,6 +1886,28 @@ var accFilter = { provider: '', status: '', search: '' };
 var logSource = null, logPaused = false, logLines = [];
 var toolsSub = 'all';
 
+var ICONS = {
+  send: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M2 8h11M9 4l4 4-4 4"/></svg>',
+  play: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 2.5L11 8l-8 5.5z"/></svg>',
+  refresh: '<svg class="ic spin" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 1.5v3.5H10"/></svg>',
+  regen: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 1.5v3.5H10"/></svg>',
+  starF: '<svg class="ic" viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="miter"><path d="M8 1.5l2 4.2 4.5.5-3.3 3 .8 4.4L8 11.4l-4 2.2.8-4.4-3.3-3 4.5-.5z"/></svg>',
+  starE: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter"><path d="M8 1.5l2 4.2 4.5.5-3.3 3 .8 4.4L8 11.4l-4 2.2.8-4.4-3.3-3 4.5-.5z"/></svg>',
+  pencil: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M11.5 1.5l3 3-9.5 9.5H2v-3zM9.5 3.5l3 3"/></svg>',
+  x: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg>',
+  warn: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M8 1.5L15 14H1zM8 6v4M8 11.6v.9"/></svg>',
+  file: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 1.5h7L13 5v9.5H3zM10 1.5V5h3"/></svg>',
+  download: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M8 2v8M4.5 6.5L8 10l3.5-3.5M2.5 13.5h11"/></svg>',
+  upload: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M8 10V2M4.5 5.5L8 2l3.5 3.5M2.5 13.5h11"/></svg>',
+  sun: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><circle cx="8" cy="8" r="3"/><path d="M8 .8v1.8M8 13.4v1.8M.8 8h1.8M13.4 8h1.8M2.9 2.9l1.3 1.3M11.8 11.8l1.3 1.3M13.1 2.9l-1.3 1.3M4.2 11.8l-1.3 1.3"/></svg>',
+  moonSm: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter"><path d="M13.5 9.5A6 6 0 1 1 6.5 2.5a4.8 4.8 0 0 0 7 7z"/></svg>',
+  chevD: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square" stroke-linejoin="miter"><path d="M3.5 5.5L8 10l4.5-4.5"/></svg>',
+  chevU: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="square" stroke-linejoin="miter"><path d="M3.5 10.5L8 6l4.5 4.5"/></svg>',
+  arrowBack: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M14 8H3M7 4L3 8l4 4"/></svg>',
+  tool: '<svg class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M9.8 2.6a3 3 0 0 0-3.8 3.8L2 10.4 3.6 12l4-4a3 3 0 0 0 3.8-3.8L9.7 5.9l-.8-.8z"/></svg>',
+};
+function ic(name) { return ICONS[name] || ''; }
+
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
 function el(sel) { return document.querySelector(sel); }
 function els(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
@@ -1915,7 +1946,7 @@ function fmtUptime(sec) { if (!sec) return '—'; var d = Math.floor(sec/86400),
 function fmtSize(n) { if (!n) return '0B'; if (n < 1024) return n + 'B'; if (n < 1048576) return (n/1024).toFixed(1) + 'KB'; return (n/1048576).toFixed(1) + 'MB'; }
 function setAccent(name) { var map = { mint: 'var(--ok)', amber: 'var(--warn)', blue: 'var(--info)', coral: 'var(--err)' }; document.documentElement.style.setProperty('--accent', map[name] || 'var(--ok)'); els('#s-swatches .swatch').forEach(function(s){ s.classList.toggle('active', s.dataset.accent === name); }); }
 
-function applyTheme(mode) { if (mode === 'light') document.body.classList.add('light'); else document.body.classList.remove('light'); try { localStorage.setItem('pool_theme', mode); } catch(e) {} var btn = el('#theme-toggle'); if (btn) btn.textContent = mode === 'light' ? 'Dark Mode' : 'Light Mode'; }
+function applyTheme(mode) { if (mode === 'light') document.body.classList.add('light'); else document.body.classList.remove('light'); try { localStorage.setItem('pool_theme', mode); } catch(e) {} var btn = el('#theme-toggle'); if (btn) btn.innerHTML = (mode === 'light' ? ic('sun') : ic('moonSm')) + ' ' + (mode === 'light' ? 'Dark Mode' : 'Light Mode'); }
 (function initTheme(){ var saved = 'dark'; try { saved = localStorage.getItem('pool_theme') || 'dark'; } catch(e) {} applyTheme(saved); var btn = el('#theme-toggle'); if (btn) btn.addEventListener('click', function() { var cur = document.body.classList.contains('light') ? 'dark' : 'light'; applyTheme(cur); }); })();
 
 var showReasoning = true;
@@ -2117,7 +2148,7 @@ function renderAccounts() {
     var prov = state.providers[a.provider]; var paid = prov && prov.paid;
     var effModel = a.model || (prov && prov.models ? (prov.models[state.settings.defaultAlias] || prov.models.smart) : null);
     var modelLine = a.model ? '<div style="color:var(--warn);font-size:9px;margin-top:2px">◆ ' + esc(a.model) + '</div>' : (effModel ? '<div style="color:var(--fg-3);font-size:9px;margin-top:2px">◇ ' + esc(effModel) + '</div>' : '');
-    var errLine = a.lastError ? '<div style="color:var(--err);font-size:9px;margin-top:3px;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(a.lastError) + '">⚠ ' + esc(a.lastError.slice(0, 90)) + '</div>' : '';
+    var errLine = a.lastError ? '<div style="color:var(--err);font-size:9px;margin-top:3px;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(a.lastError) + '">' + ic('warn') + ' ' + esc(a.lastError.slice(0, 90)) + '</div>' : '';
     var sel = accSelected.has(a.id) ? ' checked' : '';
     h += '<tr' + (a.enabled ? '' : ' style="opacity:.5"') + '>';
     h += '<td><input type="checkbox" data-sel="' + esc(a.id) + '"' + sel + '></td>';
@@ -2128,7 +2159,7 @@ function renderAccounts() {
     h += '<td class="num">' + (a.status === 'cooldown' && a.resetAt ? fmtCountdown(a.resetAt) : '—') + '</td>';
     h += '<td class="num">' + (a.priority == null ? '—' : a.priority) + '</td>';
     h += '<td class="num">' + fmtAgo(a.lastUsed) + '</td>';
-    h += '<td><button class="btn small ghost" data-act="probe" data-id="' + esc(a.id) + '">Probe</button> <button class="btn small ghost" data-act="reset-probe" data-id="' + esc(a.id) + '" title="Clear errors then probe">Reset+Probe</button> <button class="btn small ghost" data-act="reset" data-id="' + esc(a.id) + '">Reset</button> <button class="btn small ghost" data-act="edit" data-id="' + esc(a.id) + '">Edit</button> <button class="btn small ghost danger" data-act="del" data-id="' + esc(a.id) + '">✕</button></td>';
+    h += '<td><button class="btn small ghost" data-act="probe" data-id="' + esc(a.id) + '">Probe</button> <button class="btn small ghost" data-act="reset-probe" data-id="' + esc(a.id) + '" title="Clear errors then probe">Reset+Probe</button> <button class="btn small ghost" data-act="reset" data-id="' + esc(a.id) + '">Reset</button> <button class="btn small ghost" data-act="edit" data-id="' + esc(a.id) + '">Edit</button> <button class="btn small ghost danger" data-act="del" data-id="' + esc(a.id) + '">' + ic('x') + '</button></td>';
     h += '</tr>';
   });
   h += '</tbody></table>';
@@ -2228,7 +2259,7 @@ function renderProviders() {
     h += '<td><select data-toggle="enabled" data-prov="' + esc(name) + '" style="background:transparent;border:none;font-size:10px"><option value="true"' + (p.enabled ? ' selected' : '') + '>ON</option><option value="false"' + (!p.enabled ? ' selected' : '') + '>OFF</option></select></td>';
     h += '<td class="num">' + cnt + '</td>';
     h += '<td style="font-size:9px;color:var(--fg-3)">' + esc((p.models && p.models.smart) || '—') + '</td>';
-    h += '<td><button class="btn small ghost" data-edit-prov="' + esc(name) + '">Edit</button> <button class="btn small ghost danger" data-del="' + esc(name) + '"' + (cnt > 0 ? ' disabled title="hapus akun dulu"' : '') + '>✕</button></td>';
+    h += '<td><button class="btn small ghost" data-edit-prov="' + esc(name) + '">Edit</button> <button class="btn small ghost danger" data-del="' + esc(name) + '"' + (cnt > 0 ? ' disabled title="hapus akun dulu"' : '') + '>' + ic('x') + '</button></td>';
     h += '</tr>';
   });
   h += '</tbody></table>';
@@ -2282,7 +2313,7 @@ function renderAgents() {
   var wrap = el('#agents-table');
   if (!agentData.agents.length) { wrap.innerHTML = '<div class="empty">no agents</div>'; return; }
   var h = '<div class="tbl-wrap"><table><thead><tr><th>Name</th><th>Mode</th><th>Model</th><th class="num">Temp</th><th class="num">Tools</th><th class="num">Skills</th><th>Enabled</th><th>Aksi</th></tr></thead><tbody>';
-  agentData.agents.forEach(function(a) { var modeLabel = a.mode === 'chat' ? '<span class="badge info">CHAT</span>' : '<span class="badge ok">AGENT</span>'; h += '<tr><td><b>' + esc(a.name) + '</b><div style="color:var(--fg-3);font-size:9px">' + esc(a.description || '') + '</div></td><td>' + modeLabel + '</td><td>' + esc(a.model) + '</td><td class="num">' + (a.temperature || 0) + '</td><td class="num">' + (a.tools || []).length + '</td><td class="num">' + (a.skills || []).length + '</td><td>' + (a.enabled ? '<span class="badge ok">ON</span>' : '<span class="badge mute">OFF</span>') + '</td><td><button class="btn small ghost" data-ae="' + esc(a.id) + '">Edit</button> <button class="btn small ghost danger" data-ad="' + esc(a.id) + '">✕</button></td></tr>'; });
+  agentData.agents.forEach(function(a) { var modeLabel = a.mode === 'chat' ? '<span class="badge info">CHAT</span>' : '<span class="badge ok">AGENT</span>'; h += '<tr><td><b>' + esc(a.name) + '</b><div style="color:var(--fg-3);font-size:9px">' + esc(a.description || '') + '</div></td><td>' + modeLabel + '</td><td>' + esc(a.model) + '</td><td class="num">' + (a.temperature || 0) + '</td><td class="num">' + (a.tools || []).length + '</td><td class="num">' + (a.skills || []).length + '</td><td>' + (a.enabled ? '<span class="badge ok">ON</span>' : '<span class="badge mute">OFF</span>') + '</td><td><button class="btn small ghost" data-ae="' + esc(a.id) + '">Edit</button> <button class="btn small ghost danger" data-ad="' + esc(a.id) + '">' + ic('x') + '</button></td></tr>'; });
   h += '</tbody></table></div>'; wrap.innerHTML = h;
   wrap.querySelectorAll('[data-ae]').forEach(function(b) { b.addEventListener('click', function() { editAgent(b.dataset.ae); }); });
   wrap.querySelectorAll('[data-ad]').forEach(function(b) { b.addEventListener('click', async function() { if (!(await confirmModal('Hapus agent?'))) return; try { await api('/admin/agents/' + b.dataset.ad, { method: 'DELETE' }); toast('deleted', 'ok'); loadAgents(); } catch (e) { toast(e.message, 'err'); } }); });
@@ -2291,7 +2322,7 @@ function renderSkills() {
   var wrap = el('#skills-table');
   if (!agentData.skills.length) { wrap.innerHTML = '<div class="empty">no skills yet</div>'; return; }
   var h = '<div class="tbl-wrap"><table><thead><tr><th>Name</th><th>Description</th><th class="num">Tools</th><th>Aksi</th></tr></thead><tbody>';
-  agentData.skills.forEach(function(s) { h += '<tr><td><b>' + esc(s.name) + '</b></td><td style="color:var(--fg-3);font-size:10px">' + esc(s.description || '') + '</td><td class="num">' + (s.tools || []).length + '</td><td><button class="btn small ghost" data-se="' + esc(s.id) + '">Edit</button> <button class="btn small ghost danger" data-sd="' + esc(s.id) + '">✕</button></td></tr>'; });
+  agentData.skills.forEach(function(s) { h += '<tr><td><b>' + esc(s.name) + '</b></td><td style="color:var(--fg-3);font-size:10px">' + esc(s.description || '') + '</td><td class="num">' + (s.tools || []).length + '</td><td><button class="btn small ghost" data-se="' + esc(s.id) + '">Edit</button> <button class="btn small ghost danger" data-sd="' + esc(s.id) + '">' + ic('x') + '</button></td></tr>'; });
   h += '</tbody></table></div>'; wrap.innerHTML = h;
   wrap.querySelectorAll('[data-se]').forEach(function(b) { b.addEventListener('click', function() { editSkill(b.dataset.se); }); });
   wrap.querySelectorAll('[data-sd]').forEach(function(b) { b.addEventListener('click', async function() { if (!(await confirmModal('Hapus skill?'))) return; try { await api('/admin/skills/' + b.dataset.sd, { method: 'DELETE' }); toast('deleted', 'ok'); loadAgents(); } catch (e) { toast(e.message, 'err'); } }); });
@@ -2361,7 +2392,7 @@ function renderPlugins(list) {
   var wrap = el('#plugins-table');
   if (!list.length) { wrap.innerHTML = '<div class="empty">no plugins</div>'; return; }
   var h = '<div class="tbl-wrap"><table><thead><tr><th>Name</th><th>Enabled</th><th class="num">Tools</th><th>Aksi</th></tr></thead><tbody>';
-  list.forEach(function(p) { h += '<tr><td><b>' + esc(p.name) + '</b></td><td>' + (p.enabled ? '<span class="badge ok">ON</span>' : '<span class="badge mute">OFF</span>') + '</td><td class="num">' + p.toolsLoaded + '</td><td><button class="btn small ghost" data-pe="' + esc(p.id) + '">Edit</button> <button class="btn small ghost danger" data-pd="' + esc(p.id) + '">✕</button></td></tr>'; });
+  list.forEach(function(p) { h += '<tr><td><b>' + esc(p.name) + '</b></td><td>' + (p.enabled ? '<span class="badge ok">ON</span>' : '<span class="badge mute">OFF</span>') + '</td><td class="num">' + p.toolsLoaded + '</td><td><button class="btn small ghost" data-pe="' + esc(p.id) + '">Edit</button> <button class="btn small ghost danger" data-pd="' + esc(p.id) + '">' + ic('x') + '</button></td></tr>'; });
   h += '</tbody></table></div>'; wrap.innerHTML = h;
   wrap.querySelectorAll('[data-pe]').forEach(function(b) { b.addEventListener('click', function() { editPlugin(list.find(function(x){ return x.id === b.dataset.pe; })); }); });
   wrap.querySelectorAll('[data-pd]').forEach(function(b) { b.addEventListener('click', async function() { if (!(await confirmModal('Hapus plugin?'))) return; try { await api('/admin/plugins/' + b.dataset.pd, { method: 'DELETE' }); toast('deleted', 'ok'); loadTools(); } catch (e) { toast(e.message, 'err'); } }); });
@@ -2372,7 +2403,7 @@ function editPlugin(p) {
   if (!p) p = { id: null, name: '', enabled: true, source: '// Example plugin — exports { tools: [...] }\n// module.exports = {\n//   tools: [{\n//     name: "hello",\n//     description: "Say hello",\n//     parameters: { type: "object", properties: { name: { type: "string" } }, required: ["name"] },\n//     handler: async (args) => ({ greeting: "Hello " + args.name })\n//   }]\n// };\n' };
   var body = '<div class="field"><label>Name</label><input id="pl-name" value="' + esc(p.name) + '"></div>' +
     '<div class="field"><label>Enabled</label><select id="pl-enabled"><option value="true"' + (p.enabled ? ' selected' : '') + '>yes</option><option value="false"' + (!p.enabled ? ' selected' : '') + '>no</option></select></div>' +
-    '<div class="field"><label>Source (JS module)</label><textarea id="pl-src" rows="14" style="font-family:monospace;font-size:11px">' + esc(p.source) + '</textarea><div class="hint" style="color:var(--warn)">⚠ Dieksekusi saat load.</div></div>';
+    '<div class="field"><label>Source (JS module)</label><textarea id="pl-src" rows="14" style="font-family:monospace;font-size:11px">' + esc(p.source) + '</textarea><div class="hint" style="color:var(--warn)">' + ic('warn') + ' Dieksekusi saat load.</div></div>';
   openModal(isNew ? 'New Plugin' : 'Edit Plugin', body, {
     confirmLabel: 'Save', wide: true,
     onConfirm: async function() {
@@ -2396,7 +2427,7 @@ function renderMCP(list) {
     h += '<td>' + esc(s.transport) + '</td>';
     h += '<td style="font-size:9px;color:var(--fg-3);max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(target) + '</td>';
     h += '<td>' + sb + '</td><td class="num">' + (s.tools ? s.tools.length : 0) + '</td>';
-    h += '<td>' + (s.status === 'connected' ? '<button class="btn small ghost" data-mdisc="' + esc(s.id) + '">Disconnect</button> ' : '<button class="btn small ghost" data-mcon="' + esc(s.id) + '">Connect</button> ') + '<button class="btn small ghost" data-med="' + esc(s.id) + '">Edit</button> <button class="btn small ghost danger" data-mdd="' + esc(s.id) + '">✕</button></td></tr>';
+    h += '<td>' + (s.status === 'connected' ? '<button class="btn small ghost" data-mdisc="' + esc(s.id) + '">Disconnect</button> ' : '<button class="btn small ghost" data-mcon="' + esc(s.id) + '">Connect</button> ') + '<button class="btn small ghost" data-med="' + esc(s.id) + '">Edit</button> <button class="btn small ghost danger" data-mdd="' + esc(s.id) + '">' + ic('x') + '</button></td></tr>';
   });
   h += '</tbody></table></div>'; wrap.innerHTML = h;
   wrap.querySelectorAll('[data-mcon]').forEach(function(b) { b.addEventListener('click', async function() { toast('connecting...', 'warn'); try { await api('/admin/mcp/' + b.dataset.mcon + '/connect', { method: 'POST' }); toast('connected', 'ok'); loadMCP(); loadTools(); } catch(e) { toast(e.message, 'err'); } }); });
@@ -2449,15 +2480,15 @@ async function loadConvList() {
     list.innerHTML = filtered.map(function(c) {
       var active = c.id === currentConvId ? ' active' : '';
       var pinnedCls = c.pinned ? ' pinned' : '';
-      var pinBadge = c.pinned ? '<span class="conv-pin-badge">★</span>' : '';
+      var pinBadge = c.pinned ? '<span class="conv-pin-badge">' + ic('starF') + '</span>' : '';
       var streamBadge = activeStreams.has(c.id) ? '<span style="color:var(--accent);animation:blink 1s steps(2,start) infinite">●</span> ' : '';
       return '<div class="conv-item' + active + pinnedCls + '" data-cid="' + esc(c.id) + '">' +
         '<div class="cv-title">' + streamBadge + pinBadge + esc(c.title || '(untitled)') + '</div>' +
         '<div class="cv-meta"><span>' + (c.messageCount || 0) + ' msg</span><span>' + fmtAgo(c.updatedAt) + '</span></div>' +
         '<div class="conv-actions">' +
-          '<button class="conv-action" data-cact="pin" data-cid="' + esc(c.id) + '" title="' + (c.pinned ? 'unpin' : 'pin') + '">' + (c.pinned ? '★' : '☆') + '</button>' +
-          '<button class="conv-action" data-cact="rename" data-cid="' + esc(c.id) + '" title="rename">✎</button>' +
-          '<button class="conv-action danger" data-cact="del" data-cid="' + esc(c.id) + '" title="delete">✕</button>' +
+          '<button class="conv-action" data-cact="pin" data-cid="' + esc(c.id) + '" title="' + (c.pinned ? 'unpin' : 'pin') + '">' + (c.pinned ? ic('starF') : ic('starE')) + '</button>' +
+          '<button class="conv-action" data-cact="rename" data-cid="' + esc(c.id) + '" title="rename">' + ic('pencil') + '</button>' +
+          '<button class="conv-action danger" data-cact="del" data-cid="' + esc(c.id) + '" title="delete">' + ic('x') + '</button>' +
         '</div>' +
         '</div>';
     }).join('');
@@ -2555,7 +2586,7 @@ function renderMsg(m, idx) {
       hu += '<div class="msg-attachments">';
       m.attachments.forEach(function(a) {
         if (a.type === 'image' && a.dataUrl) hu += '<img class="msg-attach-img" src="' + a.dataUrl + '" alt="' + esc(a.name) + '">';
-        else hu += '<div class="msg-attach-file">▤ ' + esc(a.name) + ' (' + fmtSize(a.size) + ')' + (a.truncated ? ' · preview only' : '') + '</div>';
+        else hu += '<div class="msg-attach-file">' + ic('file') + ' ' + esc(a.name) + ' (' + fmtSize(a.size) + ')' + (a.truncated ? ' · preview only' : '') + '</div>';
       });
       hu += '</div>';
     }
@@ -2565,17 +2596,17 @@ function renderMsg(m, idx) {
   if (m.role === 'assistant') {
     var isLast = currentConv && idx === currentConv.messages.length - 1;
     var h = '<div class="msg msg-assistant">';
-    h += '<div class="msg-actions">' + (m.content ? '<button class="msg-action-btn" data-mact="copy" data-idx="' + idx + '" title="copy">copy</button>' : '') + '<button class="msg-action-btn danger" data-mact="truncate" data-idx="' + idx + '" title="hapus dari sini">del</button>' + (isLast ? '<button class="msg-action-btn" data-mact="regen" data-idx="' + idx + '" title="regenerate">↻</button>' : '') + '</div>';
+    h += '<div class="msg-actions">' + (m.content ? '<button class="msg-action-btn" data-mact="copy" data-idx="' + idx + '" title="copy">copy</button>' : '') + '<button class="msg-action-btn danger" data-mact="truncate" data-idx="' + idx + '" title="hapus dari sini">del</button>' + (isLast ? '<button class="msg-action-btn" data-mact="regen" data-idx="' + idx + '" title="regenerate">' + ic('regen') + '</button>' : '') + '</div>';
     h += '<div class="msg-role">ASSISTANT' + (m.mode ? ' · ' + m.mode.toUpperCase() : '') + '</div>';
     if (m.reasoning) {
       h += '<details class="msg-reasoning"><summary>Thinking (' + m.reasoning.length + ' chars)</summary><div class="reasoning-content">' + escHtml(m.reasoning) + '</div></details>';
     }
     if (m.content) h += '<div class="msg-content md-content">' + mdRender(m.content) + '</div>';
-    if (m.tool_calls) { m.tool_calls.forEach(function(tc) { h += '<div class="msg-tool-block"><div><span class="tc-name">▸ ' + esc(tc.function.name) + '</span></div><div class="tc-args">' + esc(tc.function.arguments || '') + '</div></div>'; }); }
+    if (m.tool_calls) { m.tool_calls.forEach(function(tc) { h += '<div class="msg-tool-block"><div><span class="tc-name">' + ic('chevD') + ' ' + esc(tc.function.name) + '</span></div><div class="tc-args">' + esc(tc.function.arguments || '') + '</div></div>'; }); }
     h += '</div>';
     return h;
   }
-  if (m.role === 'tool') return '<div class="msg msg-tool-block"><div class="tc-result" style="margin-top:0">← ' + esc(m.content || '').slice(0, 500) + '</div></div>';
+  if (m.role === 'tool') return '<div class="msg msg-tool-block"><div class="tc-result" style="margin-top:0">' + ic('arrowBack') + ' ' + esc(m.content || '').slice(0, 500) + '</div></div>';
   return '';
 }
 function appendStreamingMsg() { var box = el('#chat-thread'); var div = document.createElement('div'); div.className = 'msg msg-assistant'; div.innerHTML = '<div class="msg-role">ASSISTANT</div><div class="msg-content streaming"></div>'; box.appendChild(div); box.scrollTop = box.scrollHeight; return div.querySelector('.msg-content'); }
@@ -2663,7 +2694,7 @@ function updateChatInfo(info) {
     bar.innerHTML = '<span class="ci-item ci-active">\u25cf STREAMING</span>' + (info.served ? '<span class="ci-item"><b style="color:var(--accent)">' + esc(info.served.provider) + '</b> / ' + esc(info.served.account) + (info.served.model ? ' · ' + esc(info.served.model) : '') + '</span>' : '<span class="ci-item ci-dim">routing...</span>') + (info.mode ? '<span class="ci-item ci-dim">· ' + info.mode.toUpperCase() + ' mode</span>' : '');
     return;
   }
-  if (info.status === 'error') { bar.innerHTML = '<span class="ci-item ci-err">\u2715 error</span>'; return; }
+  if (info.status === 'error') { bar.innerHTML = '<span class="ci-item ci-err">' + ic('warn') + ' error</span>'; return; }
   if (info.served) {
     var bits = ['<span class="ci-item"><b style="color:var(--accent)">' + esc(info.served.provider) + '</b> / ' + esc(info.served.account) + (info.served.model ? ' · ' + esc(info.served.model) : '') + '</span>'];
     if (info.inputTokens) bits.push('<span class="ci-item">in: ' + info.inputTokens + '</span>');
@@ -2690,11 +2721,19 @@ document.addEventListener('click', function(e) {
 function createThinkingIndicator() {
   var div = document.createElement('div');
   div.className = 'moon-thinking';
-  div.innerHTML = '<span class="moon-icon">🌑</span><span class="moon-text">Thinking... executing tool</span>';
-  var icon = div.querySelector('.moon-icon');
-  var phases = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
-  var idx = 0;
-  var interval = setInterval(function() { idx = (idx + 1) % phases.length; icon.textContent = phases[idx]; }, 200);
+  div.innerHTML = '<svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true">' +
+    '<defs><mask id="moon-mask"><rect x="0" y="0" width="24" height="24" fill="white"/><circle class="moon-shadow" cx="17" cy="8" r="9" fill="black"/></mask></defs>' +
+    '<circle class="moon-core" cx="12" cy="12" r="8.5" fill="currentColor" mask="url(#moon-mask)"/>' +
+    '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>' +
+    '<span class="moon-text">Thinking... executing tool</span>';
+  var shadow = div.querySelector('.moon-shadow');
+  var t = 0;
+  var interval = setInterval(function() {
+    t = (t + 1) % 8;
+    // geser bayangan melintasi piringan — siklus fase bulan
+    var dx = -8 + t * 2; // dari -8 (gerhana penuh) ke +6
+    shadow.setAttribute('cx', String(12 + dx));
+  }, 200);
   div._cleanup = function() { clearInterval(interval); div.remove(); };
   return div;
 }
@@ -2966,7 +3005,7 @@ function renderModels() {
   var wrap = el('#mdl-table-wrap');
   if (!list.length) { wrap.innerHTML = '<div class="empty">no models. Klik "+ Tambah Model" atau "Reseed from Providers".</div>'; return; }
   var h = '<table><thead><tr><th>Provider</th><th>Model ID</th><th>Label</th><th>Input</th><th>Output</th><th class="num">Priority</th><th class="num">Context</th><th>Enabled</th><th>Aksi</th></tr></thead><tbody>';
-  list.forEach(function(m) { h += '<tr><td style="color:var(--accent);font-weight:600">' + esc(m.provider) + '</td><td style="font-family:monospace;font-size:10px;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(m.modelId) + '">' + esc(m.modelId) + '</td><td>' + mdlLabels(m).map(function(l){ return '<span class="badge info" style="margin-right:3px">' + esc(l) + '</span>'; }).join('') + '</td><td style="font-size:9px;color:var(--fg-3)">' + esc((m.input || []).join(',')) + '</td><td style="font-size:9px;color:var(--fg-3)">' + esc((m.output || []).join(',')) + '</td><td class="num">' + (m.priority || 0) + '</td><td class="num" style="color:var(--warn)">' + (m.contextLength || '128k') + '</td><td>' + (m.enabled ? '<span class="badge ok">ON</span>' : '<span class="badge mute">OFF</span>') + '</td><td><button class="btn small ghost" data-med="' + esc(m.id) + '">Edit</button> <button class="btn small ghost danger" data-mdl-del="' + esc(m.id) + '">✕</button></td></tr>'; });
+  list.forEach(function(m) { h += '<tr><td style="color:var(--accent);font-weight:600">' + esc(m.provider) + '</td><td style="font-family:monospace;font-size:10px;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(m.modelId) + '">' + esc(m.modelId) + '</td><td>' + mdlLabels(m).map(function(l){ return '<span class="badge info" style="margin-right:3px">' + esc(l) + '</span>'; }).join('') + '</td><td style="font-size:9px;color:var(--fg-3)">' + esc((m.input || []).join(',')) + '</td><td style="font-size:9px;color:var(--fg-3)">' + esc((m.output || []).join(',')) + '</td><td class="num">' + (m.priority || 0) + '</td><td class="num" style="color:var(--warn)">' + (m.contextLength || '128k') + '</td><td>' + (m.enabled ? '<span class="badge ok">ON</span>' : '<span class="badge mute">OFF</span>') + '</td><td><button class="btn small ghost" data-med="' + esc(m.id) + '">Edit</button> <button class="btn small ghost danger" data-mdl-del="' + esc(m.id) + '">' + ic('x') + '</button></td></tr>'; });
   h += '</tbody></table>';
   wrap.innerHTML = h;
   wrap.querySelectorAll('[data-med]').forEach(function(b) { b.addEventListener('click', function() { editModel(b.dataset.med); }); });
@@ -3029,7 +3068,7 @@ function renderAttachments() {
   var box = el('#chat-attachments'); if (!box) return;
   if (!pendingAttachments.length) { box.innerHTML = ''; box.style.display = 'none'; return; }
   box.style.display = 'flex';
-  box.innerHTML = pendingAttachments.map(function(a, i) { var thumb = (a.type === 'image' && a.dataUrl) ? '<img src="' + a.dataUrl + '" style="width:24px;height:24px;object-fit:cover;border:1px solid var(--line)">' : '▤'; return '<div class="attachment-chip">' + thumb + ' <span>' + esc(a.name) + ' (' + fmtSize(a.size) + ')</span><button class="attach-remove" data-i="' + i + '">✕</button></div>'; }).join('');
+  box.innerHTML = pendingAttachments.map(function(a, i) { var thumb = (a.type === 'image' && a.dataUrl) ? '<img src="' + a.dataUrl + '" style="width:24px;height:24px;object-fit:cover;border:1px solid var(--line)">' : ic('file'); return '<div class="attachment-chip">' + thumb + ' <span>' + esc(a.name) + ' (' + fmtSize(a.size) + ')</span><button class="attach-remove" data-i="' + i + '" title="remove">' + ic('x') + '</button></div>'; }).join('');
   box.querySelectorAll('.attach-remove').forEach(function(b) { b.addEventListener('click', function() { pendingAttachments.splice(parseInt(b.dataset.i, 10), 1); renderAttachments(); }); });
 }
 el('#chat-attach-btn').addEventListener('click', function() { el('#chat-attach-input').click(); });
@@ -3127,9 +3166,9 @@ function renderPriorityRows() {
     return '<div data-pri-name="' + esc(eng) + '" style="display:flex;gap:6px;align-items:center;padding:5px 8px;border:2px solid var(--line);background:var(--bg-2)">' +
       '<span style="font-family:Silkscreen,monospace;font-size:11px;min-width:22px;color:var(--accent)">' + (idx+1) + '.</span>' +
       '<span style="flex:1;font-size:11px">' + esc(m.name) + ' <span style="color:var(--fg-3);font-size:9px">\u00b7 ' + esc(m.desc) + '</span></span>' +
-      '<button class="btn ghost small" data-pri-up="' + esc(eng) + '"' + (idx === 0 ? ' disabled' : '') + ' title="up">\u25b2</button>' +
-      '<button class="btn ghost small" data-pri-down="' + esc(eng) + '"' + (idx === _priorityCache.length-1 ? ' disabled' : '') + ' title="down">\u25bc</button>' +
-      '<button class="btn ghost small danger" data-pri-del="' + esc(eng) + '" title="remove">\u2715</button>' +
+      '<button class="btn ghost small" data-pri-up="' + esc(eng) + '"' + (idx === 0 ? ' disabled' : '') + ' title="up">' + ic('chevU') + '</button>' +
+      '<button class="btn ghost small" data-pri-down="' + esc(eng) + '"' + (idx === _priorityCache.length-1 ? ' disabled' : '') + ' title="down">' + ic('chevD') + '</button>' +
+      '<button class="btn ghost small danger" data-pri-del="' + esc(eng) + '" title="remove">' + ic('x') + '</button>' +
       '</div>';
   }).join('');
   var missing = Object.keys(SEARCH_ENGINE_META).filter(function(k){ return _priorityCache.indexOf(k) === -1; });
@@ -3286,7 +3325,7 @@ el('#s-reset-all').addEventListener('click', async function() { if (!(await conf
 function openModal(title, body, opts) {
   opts = opts || {};
   var ov = document.createElement('div'); ov.className = 'overlay';
-  ov.innerHTML = '<div class="modal' + (opts.wide ? ' wide' : '') + '"><div class="modal-head"><div class="sec-title" style="border:none;font-size:12px">' + esc(title) + '</div><button class="btn ghost small" data-act="close">✕</button></div><div class="modal-body">' + body + '</div><div class="modal-foot"><button class="btn ghost" data-act="cancel">Cancel</button>' + (opts.onConfirm ? '<button class="btn primary" data-act="confirm">' + esc(opts.confirmLabel || 'Save') + '</button>' : '') + '</div></div>';
+  ov.innerHTML = '<div class="modal' + (opts.wide ? ' wide' : '') + '"><div class="modal-head"><div class="sec-title" style="border:none;font-size:12px">' + esc(title) + '</div><button class="btn ghost small" data-act="close" title="close">' + ic('x') + '</button></div><div class="modal-body">' + body + '</div><div class="modal-foot"><button class="btn ghost" data-act="cancel">Cancel</button>' + (opts.onConfirm ? '<button class="btn primary" data-act="confirm">' + esc(opts.confirmLabel || 'Save') + '</button>' : '') + '</div></div>';
   document.body.appendChild(ov);
   var escHandler = function(e) { if (e.key === 'Escape' && document.body.contains(ov)) { try { if (opts.onCancel) opts.onCancel(); } catch(er) {} close(); } };
   document.addEventListener('keydown', escHandler);
